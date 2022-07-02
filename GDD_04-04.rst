@@ -1,0 +1,133 @@
+.. footer:: **HOWL**
+====
+GESTION DE DATOS
+====
+GRAFOS
+====
+Grafo
+----
+**G = (V,A)**
+
+Donde V representa un conjunto de puntos, llamados vértices o nodos, y A es un conjunto de relaciones entre pares de vértices, llamadas aristas o arcos.
+De esta forma un grafo es un conjunto de vértices y arcos que los relacionan.
+
+Dado que un grafo es un concepto matematico en lo que se llama Teoría de Grafos Computacional, se utilizaran otros terminos para referirse a sus componentes.
+
+- **Nodos**: Son los denomivados vertices. Un modelo computacional de grafos pueden incluir muchos valores.
+- **Relaciones**: Son los identificados aristas o arcos, dado que lo que hacen es relacionar a los nodos.
+- **Grado**: Es la cantidad de arcos que salen de un vertice (grado positivo), o la cantidad de arcos que llegan a un vertice (grado negativo). El nodo que tenga la cantidad de relaciones.
+
+Objetivo
+----
+Los grafos tienen como objetivo fundamental modelizar un problema especifico a traves de un modelo abstracto donde los elementos que participan en el problema son los vertices y las relaciones que pueden existir en entre estos participantes son los arcos.
+
+Los grafos son estructuras abstractas, o sea, que no existen realmente sino que solo sirven como una modelizacion virtual de un problema real. Para su tratamiento computarizado los grafos requeriran de una representacion computacional, la cual convertira esta estructura abstracta en un almacenamiento concreto representado a traves de alguna de las representaciones computacionales existentes.
+
+Representacion computacional
+----
+Existen dos formas de representar, una estatica y una dinamica.
+Es el espacio real ocupado en base al espacio modelado.
+
+**Estatica**: Se construyen sobre estructuras computacionales rigidas que utilizan el concepto de contiguidad como los vectores y matrices, o sea, que el siguiente vertice este a la derecha y el anterior a la izquierda de un vertice determinado, ocurriendo lo mismo con los arcos, por ello debe contemplar la existencia de todas las relaciones posibles entre todos los vertices existentes.
+Tiene una dimension, un limite, y el movimiento del grafo no la haría cambiar.
+
+**Dinamica**: Se caracterizan por acompañar la dinamica del grafo, esto es que el espacio utilizado por la representacion va cambiando en funcion de como va cambiando el grafo.
+
+Matriz de adyacencia
+----
+Si consideramos un grafo G=(V,A) con n vertices. La matriz de adyacencia es aquella de dimension Ma(nxn) con n como la cantidad de vertices, donde la posicion Maij es el numero de aristas que unen los vertices Vi y Vj.
+Es una representacion estatica.
+
+Matriz de incidencia
+----
+Si consideramos un grafo G=(V,A) donde V representa los n vertices y A los m arcos que componen el grafo. Su matriz de incidencia es la matriz de orden nxm, MInxm, donde MIij es 1 si Vi es incidente con Aj y MIij es 0 en caso contrario.
+Es una representacion estatica.
+
+Lista de adyacencia
+----
+Las listas de adyacencia es un tipo de representación que se conforma por una lista que representa los nodos que componen el grafo, donde cada una de los elementos que componen dicha lista de nodos mantiene otra lista asociada que representa los arcos o relaciones que salen de dicho nodo.
+Es una representacion dinamica. El espacio ocupado es solo el espacio modelado.
+
+Grafo Libre
+----
+Aquel grafo que representado como G = (V, A) donde V representa el conjunto de Vértices y A representa el conjunto de arcos, A es un conjunto vacío. De esta forma un grafo libre es el grafo en el cual no existen arcos, o sea, que todos los vértices son aislados.
+
+Grafo Completo
+----
+Aquel grafo que representado como G = (V, A) donde V representa el conjunto de Vértices y A representa el conjunto de arcos, A es un conjunto completo, o sea, que contiene todos los arcos posibles. De esta forma un grafo completo es el grafo en el cual cada vértice está conectado a todos los vértices que componen el grafo, incluido el mismo.
+
+Grafo Regular
+----
+Es regular de determinado grado g, si cada vértice tiene grado g, o sea, que todos los vértices tienen el mismo grado g.
+
+Grafo Simple
+----
+Es simple si a lo sumo un arco une dos vértices cualesquiera, esto es, que existe solo una arista que une a dos vértices específicos.
+
+Grafo Complejo
+----
+Es aquel donde puede existir más de un arco que vincule dos vértices cualesquiera, por ello se considera que cualquier grafo que no cumpla con la condición de ser simple se considera complejo.
+
+Grafo Conexo
+----
+Se considera conexo si todo par de vértices esta conectado por un camino, o sea, si para cualquiera par de vértices existe al menos un camino posible entre ellos, o dicho de otra forma que existe al menos una conexión entre todos los nodos que conforman el grafo, sea esta directa (a través de un arco entre ambos) o indirecta (a través de más de un arco entre ambos).
+
+Grafo Complementario
+----
+Dado un grafo G = (V, A), donde V representa el conjunto de vértices y A el conjunto de arcos, el grafo complementario denominado Gc, es aquel que esta compuesto por los mismos vértices que G y el conjunto de aristas son todas aquellas que le faltan a G para ser un grafo completo.
+
+Clasificacion
+----
+- **Dirigido**: Se identifica sentido de la relacion.
+- **No dirigidos**: No se identifica sentido a la relacion.
+
+- **Restrictos**: La relación que se modela no debe cumplir las propiedades de reflexividad, simetría y transitividad. O sea que deben ser Anti-equivalentes.
+- **Irrestrictos**: No se aplica ninguna restricción a la relación que se modela, pudiendo o no modelar relaciones que sean reflexivas, simétricas o transitivas.
+
+Caminos y pasos
+----
+**Camino**: Un camino entre dos nodos a y b se establece cuando existe una vinculacion directa o indirecta entre ambos. Esto es cuando se pueden vincular entre si mediante uno o mas arcos, independientemente del sentido de los arcos.
+
+**Paso**: Un paso entre dos nodos a y b se produce cuando existe un camino entre ambos pero con un sentido preestablecido, esto es que partiendo del nodo a y siguiendo el sentido de los arcos se llega al nodo b.
+
+**Ciclo**: Un ciclo entre dos nodos a y b es un paso o un camino donde el origen y el destino son iguales, esto es, el vértice de inicio y el vértice de destino son iguales, pudiendo estar compuesto el ciclo por uno o más arcos.
+La longitud de un bucle por convencion es cero.
+
+Busqueda
+----
+**Busqueda en profundidad (Depth First)**: Esta técnica se caracteriza por avanzar en profundidad, esto es, sin mantener un orden jerárquico de evaluación, de forma tal la técnica avanza hasta el momento que no puede avanzar más y ahí retrocede para tomar otra relación y seguir avanzando.
+
+**Busqueda en anchura (Breath First)**: A diferencia de la búsqueda en profundidad, la búsqueda en anchura, evalúa primero todos los destinos de todos los arcos que parten del vértice origen del paso o camino a evaluar, de forma tal de evaluar primero todos los destinos directos antes de pasar al siguiente.
+
+Estructuras de Datos
+----
+Una estructura de datos es un grafo dirigido y restricto, con las caracteristicas de unicidad en sus relaciones, esto es que en orden de predecesor, cada nodo solo puede tener un nodo predecesor a el. 
+Es importante destacar que las estructuras de datos son utilizadas para modelar problemas reales al igual que los grafos; la ventaja comparativa es que debido a las limitaciones de las mismas por ser grafos restrictos univocos, se simplifica su administración.
+Tambien es fundamental la utilización de estas estructuras como un medio de simplificar la programacion en función de dar soporte a algoritmos utilizando las diferentes caracteristicas de cada una de ellas de forma tal de disminuir la tarea de programación evitando realizar engorrosos algoritmos que resuelvan un problema determinado.
+
+Clasificacion de estructuras
+----
+Las estructuras de datos se pueden dividir inicialmente en estructuras biunivocas y univocas. Las primeras se caracterizan por ser univocas en ambos sentidos de la relacion manteniendo uno o ningun predecesor y uno o ningun sucesor.
+Dentro de ellas encontramos las **pilas**, las **colas** y las **listas**.
+Por otro lado, encontramos a los **arboles**, que a diferencia de las anteriores son solo univocas manteniendo un solo predecesor pero pudiendo tener más de un sucesor.
+
+Listas
+----
+Estructura de datos que tiene una dinamica abierta, esto es que dentro de una lista a la hora de realizar un alta se recorre toda la lista y se coloca el elemento a insertar en la posicion que se requiera, esto dependera de que se desee o no mantener la lista ordenada por algun valor de los nodos que la componen.
+
+- **Lista lineal**: Lista tradicional, o sea, aquella que comienza con un elemento y en la cual el ultimo puntero del nodo apunta a Null.
+- **Lista circular**: Lista en la cual el ultimo nodo apunta al primero.
+- **Lista doblemente enlazada**: Listas que se implementan con la posibilidad de que los nodos, aparte de tener un puntero al nodo siguiente, tengan un puntero al nodo anterior.
+
+Pilas
+----
+Estructura de datos que tiene como caracteristica diferencial que su dinámica de ingreso y egreso es de tipo lifo.
+
+Colas
+----
+Estructura de datos que se caracteriza por privilegiar el orden y la jerarquía en una estructura de datos manteniendo una dinámica se la conoce como fifo.
+
+Arboles
+----
+Tiene la caracteristica de no ser biunivoco, dado que solo cumple la unicidad en un sentido sabiendo que cada elemento tiene un solo predecesor pero que puede tener más de un sucesor, cosa que no ocurre con el resto de las estructuras de datos vistas hasta ahora.
+Dentro de estas caracteristicas encontramos el grado. El grado de un arbol es la maxima cantidad de sucesores que por definición puede tener cada uno de los nodos, o sea, es el grado de expansion o crecimiento que el mismo puede tener, este grado en el resto de las estructuras analizadas es 1 (uno) y por ello no se estudia.

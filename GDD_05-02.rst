@@ -1,0 +1,86 @@
+.. footer:: **HOWL**
+====
+GESTION DE DATOS
+====
+INTEGRIDAD
+====
+Integridad
+----
+Es el proceso que permite identificar la integridad de un archivo, o sea, poder validar que un archivo no ha sufrido cambios ante un proceso que lo modifico, sea este por transferencia o un proceso de cambio como la compresion y descompresion del mismo.
+
+Encriptacion
+----
+Es el proceso que permite modificar el contenido de un archivo para que mantenga el contenido establecido, pero que el mismo no pueda ser visible en un formato tradicional del mismo.
+
+Problematica de integridad
+----
+Se produce una modificacion a un archivo a traves de un proceso modificatorio. Se requiere conocer la integridad del nuevo archivo generado.
+
+CONTROL DE INTEGRIDAD
+====
+Necesidad
+----
+Cuando se produce una modificacion sobre un archivo. Por ejemplo, cuando se transmite mediante una red, se copia o se realiza un proceso de compresion y descompresion aparece la necesidad de verificar si el nuevo archivo obtenido es igual al original.
+
+Procedimiento
+----
+Si bien es cierto que la unica forma de verificar que un archivo es igual a otro se requeriría una lectura de ambos archivos con una comparacion de uno a uno, existen medios tecnológicos para poder verificar la veracidad del archivo sin necesidad de contar con el archivo original.
+
+Que se debe controlar
+----
+- **Tamaño**: Ambos archivos deben tener el mismo tamaño en cantidad de caracteres.
+- **Contenido**: Ambos archivos deben contener los mismos caracteres.
+- **Posiscion**: Considerando que ambos tengan los mismos caracteres, dichos deben estar en la misma posicion.
+
+Checksum
+----
+Se basa en el uso de un polinomio, dado que el mismo evalua tamaño, contenido y posicion.
+El tamaño esta dado por el grado del polinomio.
+El contenido esta dado por los coeficientes del polinomio.
+La posicion esta dada por el grado que acompaña a la x del polinomio.
+
+Checksum - ejemplo
+----
+ Archivo ⇒ ``Hola``
+
+ Polinomio ⇒ ``H*x^0 + o*x^1 + l*x^2 + a*x^3``
+
+Se evalua el polinimio en algun valor de x.
+El resultado se agrega al archivo destino generado via el proceso de transformacion.
+Luego se vuelve a generar el polinomio con el contenido del archivo de destino.
+Se resuelve dicho polinomio y se compara el resultado obtniedo con el almacenado en el archivo, si es igual, los archivos son iguales.
+
+En la realidad no se arma un polinomio con los caracteres como coeficientes, sino que se toman los bits que componen dicho caracters de forna tal de iluminar o apagar potencias para evitar fallas en el metodo.
+
+ Si H = 00110011, el polinomio es
+ ``0x^0 + 0x^1 + 1x^2 + 1x^3 + 0x^4 + ... + 1x^7``
+
+De esta forma la posibilidad de error es la funcion nula porque las diferenicas no se compensasn intercambiando potencias.
+El valor que se toma para evaluar es un valor comprendido entre 0 y 1 no inclusive.
+
+Control de Redundancia Ciclica (CRC)
+----
+En la funcion de los caracteres ciclicos tomados se construye un crc que puede variar desde 32 bits hasta 128 bits.
+
+ENCRIPTACION
+====
+Prefacio
+----
+El objetivo es ocultar la informacion en el archivo para que no pueda ser legible.
+El archivo debe ser modificado sin cambiar su tamaño y espacio ocupado a tal fin.
+Existen inumerables metodos. Nos concentraremos en las diferentes formas.
+
+Procesos de encriptacion
+----
+- **Desplazamiento**: Se basa en desplazamiento de los caracteres en funcion de algun patron.
+- **Reemplazo**: Se basa en el reemplazo de determinados caracteres en funcion de algun patron donde ese reemplazo puede ser fijo o variable, con o sin intervencion del usuario.
+- **Mixto**: Se aplican ambos procesos en cualquier orden, reemplazo y desplazamiento.
+
+Reemplazo
+----
+- **Fijo**: Se toma un valor por el cual se van reemplazando a determinados caracteres por un valor de acuerdo a un patron. Por ejemplo, reemplazar todas las posiciones pares por su contenido por un valor ascii preestablecido.
+- **Variable**: Se encripta el archivo con una clave dispuesta por el usuario, y dicha clave se copia al contenido del archivo o valor a encriptar.
+
+Mixto
+----
+Se aplican ambas formas de encriptacion una primero y otras despues, en cualquier orden de ejecucion, de forma tal que de dar mayor seguridad a la encriptacion.

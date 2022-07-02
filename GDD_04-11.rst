@@ -1,0 +1,71 @@
+.. footer:: **HOWL**
+====
+GESTION DE DATOS
+====
+ARBOLES
+====
+Arboles
+----
+- **Grado**: Maxima cantidad de hijos o subarboles que puede tener cada nodo.
+- **Nivel**: Posicion en la que se encuentra un nodo con respecto a la raiz del mismo, considerando que la raiz se encuentra en el 0. En cada nivel puede haber como maximo <grado>^<nivel> elementos en un nivel.
+- **Profundidad**: Cantidad de niveles con los que cuenta.
+
+Representacion computacional
+----
+- **Estatica**: A través de un vector. Los hijos de un elemento en posición i, se encuentran en la posición ``<grado>*i+1`` hasta ``<grado>*i+<grado>`` inclusive. Para hacer la operación inversa, a un elemento i, le resto ``modulo-<grado>`` (tambien sirve para averiguar que posicion de hijo es), y luego lo divido por el ``<grado>``.
+- **Dinamica**: Conjunto de nodos de igual tipo vinculados entre si a traves de punteros.
+
+Caracteristicas
+----
+- **Completo**: Todos los nodos cumplen el grado o son hojas.
+- **Balanceado**: Todos los subarboles desde la raiz pesan lo mismo, o sea tienen la misma cantidad de elementos o una diferencia indivisible por el grado.
+- **Perfectamente balanceado**: Esta balanceado en todos sus niveles.
+
+Crecimiento
+----
+El crecimiento de un arbol es exponencial en funcion del grado del mismo, o sea qe en cada nivel puede crecer en funcion del grado definido.
+La maxima cantidad de elementos posibles de un arbol esta dada por:
+
+**Max elementos** = **grado^niveles - 1**
+  → El uno nace de la imparidad de la raiz. Solo sirve para arboles binarios.
+**Max elementos** = **Σ[i=0, hasta <nivel>](grado^i)**
+  → El restar uno nace del grado de imparidad de la raiz.
+
+Busqueda
+----
+La busqueda en una estructura es inversa a su crecimiento.
+El arbol tiene crecimiento exponencial, y busqueda logaritmica.
+
+Arbol binario de busqueda (ABB)
+----
+Un arbol de grado 2 diseñado para buscar como metodo alternativo a una lista representada en un vector, donde los menores ingresan por la izquierda y los mayores a la derecha.
+
+Balanceamiento de un arbol
+----
+Se va interando posicionando como raiz al mas cercano a la raiz segun las relaciones. Ej, si mis relaciones son menor y mayor, y la rama de mayor pesa mas, cambio la raiz por el menor de la rama de mayores, y reinserto la raiz que quité, y asi hasta que este perfectamente balanceado.
+
+Barridos
+----
+La forma de leer el mismo. De arriba hacia abajo, de izquierda a derecha, por convencion occidental.
+Existen tres formas de leer los elementos que confroman tres barridos diferentes.
+
+- **Preorden** → El nodo se lee apenas se llega el mismo.
+- **Postorden** → El nodo se lee cuando seva del mismo y se se va a regresar.
+- **Inorden** → El nodo se lee cuando se cambia de rama en el arbol.
+::
+
+ void leer(raiz) {
+  //print(nodo, preorden)
+  leer(raiz.izquierda);
+  //print(nodo, inorden)
+  leer(raiz.derecha);
+  //print(nodo, postorden)
+ }
+
+Arbol de expresion
+----
+Una expresion puede representarse y resolverse a partir de un arbol.
+
+- **Notacion infija**: El operador esta fijo entre los operandos.
+- **Notacion prefija**: El operador esta fijo antes de los operandos.
+- **Notacion postfija**: El operador esta fijo despues de los operandos.

@@ -1,0 +1,60 @@
+.. footer:: **HOWL**
+====
+GESTION DE DATOS
+====
+NIVEL INTERNO - ALMACENAMIENTO
+====
+Tecnicas de administracion de memoria
+----
+- **Segmentacion**: Divide la memoria en segmentos de longitud variable
+- **Paginacion**: Divide la memoria en paginas, todas con la misma longitud, la cual es fija
+
+Paginacion
+----
+Una pagina tiene tres componentes. El **id page**, el **body page** y el **footer offset**.
+
+- **Id**: Es la identificacion de la pagina, las cuales se encuentran numeradas y contiguas.
+- **Body**: Es el cuerpo de la pagina donde se almacena la informacion. Este cuerpo esta dividido en unidades como registros equivalentes a renglones de una hoja.
+- **Footer offset**: Es el pie de pagina. Tiene tantas entradas como registros (renglones) contenga la pagina.
+ **El renglon es la minima unidad de asignacion de la pagina**.
+
+Los datos se almacenan en la body page de la pagina en funcion como van ingresando, y en el footer offset se registra la posicion relativa de la fila que se encuentra en esa posicion
+
+Fragmentacion en paginacion
+----
+- **Fragmentacion Externa**: Se produce cuando una pagina es menor al tamaño del cluster mediante el cual asigna espacio el disco, quedando un remanente de bytes sin ser utilizados en la grabacion.
+- **Fragmentacion Interna**: Se produce cuando la fila a almacenar en el cuerpo de la pagina es de menor tamaño que la longitud del renglon.
+
+Tambien podría suceder que el tamaño de la fila sea mas grande que el tamaño del renglon de la pagina, lo cual generara que cada fila utilice dos renglones o mas para su almacenamiento.
+
+Logica de almacenamiento
+----
+Sabiendo la tecnica de almacenamiento que existe, es la forma en la que se van a guardar la informacion en las estructuras. Como se organiza.
+
+- Clustering
+
+Clustering
+----
+Es la tecnica de agrupamiento que permite unificar objetos en funcion de algun criterio establecido. Existen dos formas de aplicar esta tecnic al momento de asignar datos.
+
+- **Intra file**: Los objetos se agrupan en funcion de la pertenencia a un conjunto determinado.
+- **Inter file**: Los objetos se agrupan en funcion a la relacion existente entre los objetos independientemente que pertenezcan a diferentes conjuntos.
+
+Almacenamiento de PK y FK
+----
+En el arbol b de indexacion de una tabla, para cada fila se agrega una columna con una referencia a una tabla donde estan todas las entradas de otra tabla que referencian a la pk de dicha fila.
+
+Almacenamiento de archivos: 
+
+- **Archivos**: Dado que el unico formato de archivo existente y manejable por un sistema operativo es el compuesto por un conjunto de caracteres ascii, es necesario identificar de alguna forma el contenido de los mismos para poder tipificarlos y administrarlos de forma diferencial.
+- **Header**: El cabecero de un archivo es el conjunto de caracteres que se colocan al inicio del mismo y que permiten definir el contenido que continua en el mismo.
+
+Tipos de Archivos
+----
+- **Extension**: La extension de un archivo esta relacionada con su tipologia y de hehco con la aplicacion destinada a su apertura y administracion. De esta forma cada tipo de archivo comienza con alguna especificacion diferente, lo cual permite identificarlo.
+
+Header de Tablas
+----
+Para la tabla crea un header que tenga informacion sobre la cantidad de filas (long), cantidad de columnas (long), y tamaño de la fila (int).
+
+Para cada columna crea un header que tenga nombre de la columna (char[256]), tipo (char), longitud (int), decimales (int), notnull(boolean)

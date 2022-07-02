@@ -1,0 +1,54 @@
+.. footer:: **HOWL**
+====
+GESTION DE DATOS
+====
+COMPRESION
+====
+Compresion
+----
+El alfabeto ascii se creo de longitud fija de forma tal que por mas que un caracter se repita mucho mas que otro, el espacio que ocupa es el mismo.
+No todos los archivos contienen los 256 caracteres especificados en el archivo ascii, por lo cual podría ocurrir que no se utilicen todos despediciando bits en su representacion.
+
+Algoritmo de Huffman
+----
+Algoritmo de compresion de datos sin perdida, que es muy eficiente con archivos de texto.
+Las computadoras codifican los caracteres mediante ascii o unicode, utilizando tamaño fijo para cada uno de ellos, 1 byte en el primer caso y 4 bytes en el segundo.
+
+El algoritmo identifica cada uno de los caracteres distintos de archivos a comprimir, y le asigna un codigo de logintud variable segun la frecuencia.
+Cuanto mas veces aparezca un carácter en los archivos, la longitud de su código va a ser mas pequeña.
+
+Proceso de compresion
+----
+Se lee el archivo y se identifica todos los caracteres distintos que utilizan y su frecuencia, ordenandolos en una tabla de forma descendiente en apariciones.
+
+Luego crea un arbol binario dividiendo el vector de a dos en función de la cantidad de repeticiones de cada carácter, comenzando con todo el vector como raíz del árbol y llegando hasta que las hojas esten compuestas por un solo caracter.
+
+Luego por convención se define que la izquierda se representa con 0 y la derecha con 1. 
+Se vuelve a leer el archivo y para cada carácter se va a buscando en el árbol generando el código de bits que representará ese carácter en función de que la búsqueda vaya por izquierda o por derecha.
+
+Descompresion
+----
+El sistema va leyendo los bits siguiendo el arbol, y obteniendo un caracter cada vez que llega a una hoja. El sistema sabe cuantos caracteres tenían entonces no necesita leer los bits que quedan al final.
+
+Condiciones de compresion
+----
+Es necesario guardar el vector en archivo el comprimido, por ese motivo los archivos muy pequeños no se comprimen. No se guarda el arbol, se guarda el vector de repeticiones ordenado descendente. El arbol se rearma al descomprimir, leyendo el vector.
+Determinar donde finaliza el vector y donde comienzas los caracteres que representan los 1 y 0.
+
+Identificar caracteres eof que pueden generarse al azar. Por esto, no se lee hasta eof, se lee la cantidad de caracteres que se sabe que tiene el archivo.
+
+Compresion multimedia
+----
+La forma de comprimir archivos multimedia es modificar su codificación
+
+- Recodificando la codificacion de **resolucion** de los archivos bajando la calidad de los mismos para utilizar menos bits para su representación.
+- Recodificando la codificación de **definicion** de los archivos bajando la calidad de los mismos para utilizar menos bits para su representación.
+
+ **Resolución** = Cantidad de pixeles.
+
+ **Definicion** = Paleta de colores, saturacion, opacidad, luminosidad, etc.
+
+Mayor compresion
+----
+Buscando cadenas de 7 bits en vez de 8, es mas probable encontrar repeticiones, por ende se comprime mas.
+Hay casos en que busca hasta incluso cadenas de 4 bits, y luego vuelve a comprimir al resultado de la primera compresion.

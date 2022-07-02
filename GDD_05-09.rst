@@ -1,0 +1,130 @@
+.. footer:: **HOWL**
+====
+GESTION DE DATOS
+====
+INDICES
+====
+Objetivo
+----
+Crear una estructura adicional a la tabla que permita mantener los datos ordenados en funcion de alguna clave.
+
+Concepto
+----
+Dependiendo del hardware, el indice puede formar parte de la tabla o ser una estructura adicional a la tabla sobre la cual se crea, lo que genera un espacio adicional y la necesidad de incorporar y eliminar valores en ambos sitios.
+En el caso de PC(8086) el indice es una estructura adicional a la tabla.
+
+Utilizacion
+----
+El indice lo que busca es un acceso performante a los datos. El objetivo no es mantener la informacion ordenada, es permitir que quede desordenada pero poder acceder directamente a un dato sobre ese conjunto desordenado, sin necesidad de buscar sobre todo el conjunto.
+
+Accesos
+----
+- **Secuencial**: Sea realiza en funcion al modo en que ingresaron los datos.
+- **Secuencial indexado**: Se realiza en funcion de alguna clave que fue definida.
+- **Directo o random**: El acceso es en forma directa a una clave sin realizar ningun recorrido.
+
+Metodos
+----
+Existen dos metodos para crer indices en un Data Base Management System
+
+- **Hashing**
+- **Arbol B** (Btree)
+En la arquitectura 8086 el metodo utilizado es el de arbol B y en la Mainframe y Minicomputadoras el metodo utilizado es Hashing.
+
+HASHING
+====
+Hashing
+----
+Trabaja sobre el concepto de una tabla y una funcion de hash, tambien llamada funcion de dispersion. Dicha funcion se utiliza para convertir algun tipo de dato en un numero pequeño que puede servir como huella digital de ese dato.
+
+El termino hash proviene de la analogia con el significado en ingles de la palabram que significa picar y mezclar. El algoritmo de hash pica y mezcla los datos para crear las huellas digitales. Estas son llamadas valores o codigos hash, las cuales pueden ser utilizados como indices en tablas hash o bien como controles de integridad de datos o archivos.
+
+Funcion de Hash
+----
+Una buena funcion de hash posee las siguientes cualidades.
+
+- **Evitar colisiones**: Se cumple cuando dado un conjunto de valores de entrada, los resultados obtenidos en el conjunto de salida son distintos.
+- **Tiende a distribuir las claves uniformemente**: Indica que tiene a distribuir los valores de salida uniformemente con respecto a los valores de entrada.
+- **Es facil de calcular**: No necesariamente significa que sea facil de escribir el algoritmo para calcular la funcion, sino que significa que el tiempo de ejecucion de ka funcion de hash debe ser O(1).
+
+Metodo de Hashing
+----
+El metodo es crear una tabla (vector de 2 dimensiones) donde en la primera dimension colocará las claves y en la segunda dimension las posiciones relativas de las mismas en la tabla donde se encuentran los datos correspondientes a esa clave.
+
+La funcion hash recibe como entrada la clave a almacenar y devuelve un valor numerico entero que corresponde a la posicion en la cual debería ir dicha clave en la tabla mencionada.
+
+Para definir este vector necesito inevitablemente algun metodo para predefinir de que tamaño crearlo. Los mainfram al ser predimensionados siempre saben de que tamaño hacerlo, las pc lo crean del minimo y dinamicamente lo van redimensionando a demanda (es mas ineficiente que el mainframe)
+
+Colisiones
+----
+Si ocurriese que una clave generara un valor de hash que apuntase a una posicion de la tabla ya ocupada, estaríamos en presencia de una colision.
+En este caso no podríamos almacenar dos registros en una misma posicion, por lo que deberíamos encontrar otra ubicacion en donde almacenar ese nuevo registro.
+Hay varias tecnicas de resolucion de colisiones, entre ellas
+
+- **Encadenamiento**
+- **Direccionamiento Abierto**
+
+Encadenamiento
+----
+En su version mas simple, cada casilla en el arreglo referencia a una lista de los registros insertados que colisionan en la misma casilla. La insercion consiste en encontrar la casilla correcta y agregar al final de la lista correspondiente. El borrado consiste en buscar y quitar de la lista.
+
+Direccionamiento Abierto
+----
+Cuando un registro no puede ser ubicado en el indice calculado por la funcion de hash, se busca otra posicion dentro de la tabla. Hay varios metodos de eleccion de esa posicion, los cuales varían segun el metodo para buscar la proxima posicion.
+
+- **Sondeo lineal**
+- **Sondeo cuadratico**
+- **Hashing doble**
+
+Sondeo lineal
+----
+Forma mas simple. Busca secuencialmente en la tabla hasta encontrar una posicion vacía. En caso de alcanzar la ultima posicion de la tabla, continúa buscando desde la primera.
+
+Sondeo cuadratico
+----
+Realiza el mismo procedimiento que la lineal, pero en vez de buscar en la posicion siguiente, busca en el cuadrado de esa posicion.
+
+Hashing doble
+----
+Aplica la funcion de hash a la clave una segunda vez, usando una funcion de hash distinta y usa ese resultado como tamaño de salto. Para que este metodo arroje buenos resultados, la funcion de hash secundaria debe ser distinta a la primaria y debe arrojar valores mayores a cero (Si no, no habría saltos, y se produciría un bucle infinito).
+
+ARBOLES M-ARIOS
+====
+Se tiene un conjunto de datos muy grande, tan grande que no podemos colocarlo en memorua principal, nos veríamos obligados a implementar el arbol de busqueda de un almacenamiento secundario, como el disco. Las caracteristicas de un disco a diferencia de la memoria principal hacen que sea necesario utilizar valores de 'M' mas grandes para poder implementar estos arboles de busqueda de forma eficiente.
+
+El tiempo de acceso a disco tipico es de 1 a 10ms, mientras que el tiempo de acceso tipico de una memoria principal es de 10 a 100ns. Por lo tanto los accesos a memorua principal son entre 10.000 y 1.000.000 veces mas veloces que los accesos a disco. Para maximizar la performance es necesario minimizar a toda costa accesos a disco.
+
+Ademas, los dicos son dispositivos orientados a bloques. Los datos son transferidos en bloques de gran tamaño entre la memoria principal y el disco. Los tamaños de bloque tipicos varían entre 512 y 4096 bytes. En consecuencia tiene sentido tomar ventaja de esa habilidad para transferir grandes bloques de datos eficientemente.
+
+Arboles B
+----
+Tipo de arbol m-ario destinado a la creacion de indices fisicos para el acceso a la informacion.
+
+El objetivo principal es minimizar las operaciones de entrada y salida hacia el disco. Al imponer la condicion de balance, el arbol es restringido de manera tal que garantice la busqueda, la insercion y la eliminacion sean todos de tiempo O(logn)
+
+El grado M del Arbol B varía entre 50 y 2000 y se determina en base al tamaño de las claves y del tamaño de la pagina de disco.
+
+ A diferencia de los arboles comunes que crecen de la raiz a las hojas. **El arbol B crece de las hojas a la raiz.**
+
+Nodo
+----
+El arbol es uno de los pocos arboles con dos tipos de nodos diferentes, el nodo raiz (o rama) y el nodo hoja.
+
+- **Nodo Hoja**: Tiene una componente de dato donde los valores de las claves van ordenados de menor a mayor y un componente puntero que contiene la posicion relativa de los datos secuenciales correspondientes a esa clave.
+- **Nodo raiz o rama**: Tiene una componente de dato donde van los valores de las claves ordenados de menor a mayor y un componente puntero qye apunta al nodo que contiene claves menores o iguales a ellas.
+
+Busqueda
+----
+Es muy parecido a buscar en un arbol binario de busqueda, excepto que en vez de hacer una decision binaria, o de dos caminos en cada nodo, hacemos una decision multicamino en base al numero de hijos del nodo.
+
+Insercion
+----
+Para insertar un elemento x, comenzamos en la raiz y realizamos una busqueda para el. Asumiendo que el elemento no esta previamente en el arbol, la busqueda sin exito terminara en un nodo hoja. Este es el punto en el arbol donde x va a ser insertado.
+
+ **Split**: Si ocurre que cuando se llega a la hoja no hay espacio para insertar el nodo se produce lo que se denomina split. Es un proceso que divide el nodo en dos dejando la mitad de elementos en cada uno respetando el orden de menor a mayor, quedando la mitad de los elementos mas chicos en un nodo y la mitad de los elementos mas grandes en el otro.
+
+Eliminacion
+----
+Para eliminar un elemento x, comenzamos en la raiz y realizamos una busqueda para el. Asumiendo que el elemento existe, si existe se llegara a la hoja donde esta y se borra. Sino dirá que no existe.
+
+ **Fusion**: Si ocurre que cuando se elimina el elemento x el nodo queda vacío, debe eliminarse el nodo, lo que puede generar una baha potencial en todos los antecesores de dicho nodo.

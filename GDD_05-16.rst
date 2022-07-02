@@ -1,0 +1,107 @@
+.. footer:: **HOWL**
+====
+GESTION DE DATOS
+====
+BASES DE DATOS
+====
+Base de Datos
+----
+Conjunto de datos interrelacionados que se ajustan a una serie de modelos preestablecidos que recogen informaicon de interes de objetos del mundo real.
+
+Data Base Manager Software
+----
+Software encargado de gestionar los datos de la Database. Su mision es proporcionar mecanismos de acceso a los datos para almacenar, definir y recuperar informacion de forma eficiente.
+Existen ademas una serie de aplicaciones en torno al dbms que aportan interfaces sencillas para mejorar los datos.
+
+Motor de Base de Datos
+----
+Para que un producto se considere asi debe cumplir con determinadas propiedades que se agrupan en la sigla **ACID**
+
+ *Atomicity, Consistency, Isolation, Durability*.
+
+Atomicidad
+----
+Es la propiedad que asegura que una operacion sea realiza o no, y por lo tanto ante un fallo del sistema no puede quedar a medias. Se dice que una operaicon es atomica cuando es imposible para otra parte de un sistema encontrar pasos intermedios. Si esta operacion consiste en una serie de pasos, todos ellos ocurren o ninguno. Es una caracteristica de los sistemas transaccionales.
+
+Consistencia e integridad
+----
+Integridad 
+ Es la propiedad que segura que solo se empieza aquello que se puede terminar. Por lo tanto se ejecutan aquellas operaciones que no van a romper las reglas y directrices de integridad de la base de datos.
+
+Consistencia
+ La propiedad de consistencia sostiene que cualquier transaccion llevará a la base de tatos de un estado valido a otro estado valido. La integridad de la base de datos nos permite asegurar que los datos son exactos y consistentes, es decir que estan siempre intactos, sean siempre los esperados y que de ninguna manera cambian ni se deformen. De esta manera podemnos garantizar ue la informacion que se presenta al usuario sera siepre la misma.
+
+Aislamiento
+----
+Esra propiedad asegura que una operacion no puede afectar a otras. Esti asegura que la realizacion de dos transacciones sobre la misma informacion sean independientes y no generen nigun tipo de error. Esta propiedad define como y cuando los cambios producidos por una operacion se hacen visibles para las demas operaciones concurrentes. El aislamiento puede alcanzar distintos niveles, siendo el parametro esencial a la hora de seleccionar un dbms.
+
+Durabilidad
+----
+Persistencia. Asegura que una vez realizada la operacion, esta perisstira y no se podrá deshacer aunque falle el sistema y que de esta forma los datos sobrevivan de alguna manera. La persistencia es la accion de preservar la informacion de un objeto de forma permanente (guardado), pero a su vez que tambien se refiere a recuperar la informacion del mismo (leerlo) para que pueda ser nuevamente utilizado.
+
+ARQUITECTURA ANSI DE UN DBSM
+====
+La arquitectura de un dbsm se compone de tres niveles hoy en la arquitectura de software conocidas como capas.
+Esta arquitectura si bien viene desde la decada del 70, es la capa utilizada actualmente para la mayoria de desarrollo en tres capas.
+El dbsm esta conformado por los siguientes niveles:
+
+- **Interno o fisico**
+- **Conceptual o logico**
+- **Externo o de usuario**
+
+Caracteristicas
+----
+**Permite vistas de usuario independientes perzonalidadas**. 
+ Cada usuario debe ser capaz de acceder a los datos, pero tiene una personalizada diferente de los datos. Estos deben ser independientes, los cambios en una vista no deben afectar a las demas.
+**Oculta los detalles fisicos de almacenamiento a los usuarios**. 
+ Los usuarios no deberían tener que lidiar con los detalles de almacenamiento de la base de datos.
+**El administrador de la base de datos debe ser capaz de cambiar las estructuras**.
+ Modifica la estructura de almacenamiento de la database sin afectar la vista de los usuarios.
+**La estructura interna de la base de datos no deberia verse afectada por cambios en los aspectos fisicos del almacenamiento**. 
+ Como un cambio a un nuevo disco por ejemplo.
+
+Vista desde el almacenamiento
+----
+- **Nivel Externo**: Una vista de usuario describe una parte de la base de datos que es relevante para un usuario en particular. Excluye datos irrelevantes, asi como los datos que el usuario no esta autorizado a acceder. Ve lo que sería una tabla con informacion, el resultado de un select.
+- **Nivel conceptual**: El nivel conceptual es una forma de describir los datos que se almacenan dentro de la base de datos y como los datos estan relacionados entre si. Este nivel no especifica como se almacenan especificamente los datos. Ven una imagen conceptual de la informacion, un der.
+- **Nivel interno**: El nivel interno implica la forma en que la base de datos se representa fisicamente en el sistema informatico. En el se describe como los datos se almacenan en la base de datos y en el hardware del equipo. Trabaja a nivel de bytes, desconoce la informacion que almacenan.
+
+Vista desde la funcionalidad
+----
+- **Nivel Externo**: Es el nivel en que el usuario interactua con el dbsm, entendiendo que el usuario puede ser un usuario final, alguna aplicacion o lenguaje de programacion. El dev desarrolla apps desde pl_sql.
+- **Nivel conceptual**: Es el nivel donde radica la logica del dbsm, o sea, donde se definen las reglas de lo que se puede y no se puede hacer. En esta capa se encuentra el analizador sintacto (parser) y semantico (scanner). El dev genera modelos logicos para desarrolar apps. El dba define el mejor nivel de diseño desde el punto de vista de dbms.
+- **Nivel interno**: Es el nivel que maneja la persistencia de la informacion en el dbsm, o sea, como se almacena la informacion. El dba define la forma en que se van a almacenar los datos y que se puede hacer o no a nivel de programacion en funcion de la configuracion del dbsm.
+
+Componentes de un dbms
+----
+- **IPL**: Initial program loader. Es un programa de carga inicial que permite levantar el servicio del dbms y disponer la estructura de memoria, cache y disco para el procesamiento de las operaciones.
+- **User manager**: Es el modulo encargado de manejar los perfiles, usuarios y roles de acceso al dbms.
+- **File manager**: Es el modulo encargado de la administracion de la logica de los archivos que componen al dbms. Sobre el archivo .bak, reconoce todas las abstracciones.
+- **Disk manager**: Es el modulo encargado de la administracion fisica de la informacion persisitida en el dbms. Sobre el archivo .bak, sabe donde esta ubicado cada objeto.
+
+User manager
+----
+Encargado de manejar todos los componentes relacionados con la seguridad del dbms incluyendo:
+
+- Administracion de usuarios
+- Permisos de acceso
+- Seguridad vertical
+- Seguridad horizontal
+
+File Manager
+----
+Encargado de administrar la logica de almacenamiento de los distintos tipos de archivos que comoponen al dbsm. Al igual que un so, maneja su propia fat. Sus funciones son:
+
+- Creacion de archivos
+- Eliminacion de archivos
+- Acceso a los archivos
+- Interconexion con el user manager para el acceso
+
+Disk Manager
+----
+Encargado de administrar el espacio fisico donde se almacenaran los archivos logicos administrados por el file manager. Sus funciones son
+
+- Asignacion de espacio de almacenamiento
+- Eliminacion de espacio liberado
+- Acceso a la informacion fisica
+- Comunicacion con el so para el acceso a disco

@@ -1,0 +1,124 @@
+.. footer:: **HOWL**
+====
+GESTION DE DATOS
+====
+ORDENAMIENTO
+====
+Clasificacion
+----
+El objetivo es dado un conjunto de valores desordenados, devolver un conjunto de ordenado de menor a mayor o mayor a menor.
+Clasificar es una vez, hasta que entre otro elemento que la desordena. 
+Ordenar es una estructura que mantiene la claisificacion.
+
+Estabilidad
+----
+Ordenamiento es estable es si mantiene el orden relativo que tenian originalmente los elementos con claves iguales. Si hay dos registros con la misma clave, y uno aparece antes que el otro, entonces el metodo es estable si en el archivo ordenado el que aparecía primero sigue apareciendo primero, y luego el segundo.
+
+In situ
+----
+Los metodos in situ transforman una estructura de datos utilizando una cantidad extra de memoria siendo esta pequeña y constante.
+Generalmente la entrada es sobrescrita por la salida a medida que se ejecuta el algoritmo.
+Por el contrario los algortimos no in situ requieren gran cantidad de memoria extra para transformar una entrada.
+
+Esta caracteristica es fundamental en lo que respecta a optimizacion de algoritmos, debido a que el hecho de utilizar la misma estructura disminuye los tiempos de ejecucion, dado que no se debe utilizar tiempo en crear nuevas estructuras, ni copiar elementos de un lugar a otro.
+
+Interno y externo
+----
+- **Metodo interno**: Si el archivo a ordenar cabe en memoria principal.
+- **Metodo externo**: Si ordenamos archivos desde un disco o dispositivo externo.
+En funcion del metodo aplicado, tambien sera diferente la concepcion del algoritmo utilizado, debido a que es bastante diferente una clasificacion interna a una externa.
+
+Complejidad
+----
+La teoria de la complejidad computacional es la parte de la teoria de la computacion que estudia la complejidad de ejecutar un algoritmo.
+
+La clase de complejidad **P** es el conjunto de los problemas de decision que pueden ser resueltos en una maquina determinista en tiempo a lo sumo polinomico. Lo que corresponde intuitivamente a problemas que pueden ser resueltos aun en el peor de sus casos.
+
+La clase de complejidad **NP** es el conjunto de los problemas de decision que pueden ser resueltos por una maquina no deterministica en tiempo mayor a polinomico.
+
+El orden de complejidad se describe como **O(funcion)** donde la funcion es la funcion matematica que acota el comportamiento del algoritmo en funcion del tiempo y la cantidad de elementos. 
+
+Eje x ⇒ cantidad de elementos
+
+Eje y ⇒ tiempos de clock
+
+Cualquier algoritmo con complejidad no lineal forma parte de los problemas np.
+
+Como evaluar complejidad
+----
+Las computadoras solo pueden realizar operaciones matematicas y comparaciones por su caracteristica booleana.
+Para evaluar la complejidad en un algoritmo determinado se evalúan principalmente la cantidad de comparaciones realizadas.
+
+El motivo se basa en que una comparacion (if) puede llegar hasta 100 veces mas lenta que una operacion matematica basica.
+
+Clasificacion - Bubble Sort
+----
+Consiste en hacer pasadas sobrelos datos, donde en cada paso los elementos adyacentes son comparadas e intercambiadas si es necesario.
+A veces no hace falta hacer pasadas sobre el array para que este quede ordenado, sino que puede quedar ordenado antes de terminar todas las pasadas.
+
+El tiempo de ejecucion del bubble sort en el peor de los casos es de O(n^2), y ocurre cuando el array viene en orden inverso. Sin embargo hay un caso en el que puede ser lineas, y es cuando el array esta previamente ordenadom resultando en un tiempo de ejecucion de O(n).
+
+Clasificacion - Selection sort
+----
+Comienza buscando el elemento mas pequeño del array y se lo intercambia con el que esta en la primera posicion, y luego busca el mas chico en los restantes y lo coloca segundo, y asi con el resto.
+
+Debido a que la mayoría de los elementos se mueven a lo sumo una vez, resulta muy bueno para ordenar archivos muy grandes y claves muy pequeñas.
+Su orden de complejidad de peor caso es O(n^2).
+
+Clasificacion - Insertion sort
+----
+Se basa en la idea de ordenamiento parcial. En la cual hay una marcador que apunta a una posicion donde a su izquierda se considera que estan los elementos parcialmente ordenados.
+
+El algoritmo comienza eligiendo el elemento marcado para poder insertarlo en su lugar apropiado en el grupo parcialmente ordenado, para eso sacamos temporalmente al elemento marcado y movemos los restantes elementos hacia la derecha. Nos detenemos cuando el elemento a ser cambiado es más pequeño que el elemento marcado, entonces ahí se intercambian el elemento que esta en esa posición con la del elemento marcado.
+
+El tiempo de ejecución es O(n2) y es alcanzable si el array viene ordenado en orden inverso.
+
+Clasificacion - Shell sort
+----
+Si hay un elemento muy pequeño muy a la derecha, justo en el lugar donde tendrían que estar los elementos más grandes, para moverlo hacia izquierda se necesitaría hacer cerca de n copias para llegar a la posición indicada.
+
+No todos los ítems deben ser movidos n espacios, pero en promedio deben moverse n/2 lugares. Por lo tanto lleva n veces n/2 cambios de lugar, resultando en n2/2 copias. Por lo cual el tiempo de ejecución es O(n2).
+Para evitar la gran cantidad de movimientos, primero compara los elementos más lejanos y luego va comparando elementos mas cercanos para finalmente realizar un Insertion Sort.
+S
+i bien no hay un consenso sobre la eficiencia del Shell Sort, se considera que este varia entre  O(n3/2) y O(n7/6) 
+
+Clasificacion - Merge sort
+----
+Es un algoritmo recursivo que utiliza la técnica de divide y vencerás para obtener un tiempo de ejecución O(n\*log(n)) sin importar cual sea la entrada. 
+Se basa en la fusión de dos o mas secuencias ordenadas en una única secuencia ordenada. Una de las desventajas de este algoritmo es que requiere de memoria extra proporcional a la cantidad de elementos del array. Es un algoritmo a considerar si estamos buscando velocidad, estabilidad, donde no se tolera un ‘peor de los casos’ y además disponemos de memoria extra. Algo que hace mas atractivo a Merge Sort es que suele acceder de forma secuencial a los elementos y es de gran utilidad para ordenar en ambientes donde solo se dispone de acceso secuencia a los registros.
+
+El algoritmo tiene como caso base una secuencia con exactamente un elemento en ella. Y ya que esa secuencia esta ordenada, no hay nada que hacer. Por lo tanto para ordenar una secuencia n > 1 elementos se deben seguir los siguientes pasos.
+
+- Dividir la secuencia en dos subsecuencias más pequeñas.
+- Ordenar recursivamente las dos subsecuencias
+- Fusionar las subsecuencias ordenadas para obtener el resultado final.
+
+Clasificacion - Quick sort
+----
+Es el algoritmo que mejor responde en la mayoría de los casos, con un tiempo promedio de O(nlogn) y O(n2) en el peor de los casos (cuanto esta ordenado). Cuanto mas ordenado estaba, peor rinde.
+
+Esta basado en la idea de divide y vencerás, en el cual un problema se soluciona dividiéndolo en dos o más subproblemas, resolviendo recursivamente cada uno de ellos para luego juntar sus soluciones para obtener la solución del original.
+
+El algoritmo básico consiste en los siguientes cuatro pasos
+
+- Elegir el un elemento como pivote
+- Comparar todos los elementos con el pivote generando dos subconjuntos a izquierda los menores o iguales y a derecha los mayores que el pivote
+
+Clasificacion - Bsort
+----
+Es una variante del Quicksort donde el funcionamiento del método es igual pero solo cambia la elección del pivote que este caso es el elemento central.
+
+Clasificacion - Meansort
+----
+Es una variante del Quicksort donde el funcionamiento del método es igual pero solo cambia la elección del pivote que este caso es el elemento más próximo a la media.
+
+Clasificacion - Heap sort
+----
+Se basa en una estructura de datos llamada montículo binario (heap), que es una de las formas de implementar una cola de prioridad. Un heap es un árbol binario completo en el cual la clave de cada nodo debe ser mayor (o igual) a las claves de sus hijos, si es que tiene. Esto implica que la clave más grande está en la raíz. 
+
+Este algoritmo tiene un orden de complejidad que nunca supera O(nlogn) y no requiere espacio de memoria adicional (in situ). Es generalmente se usa en sistemas embebidos con restricciones de tiempo real, o en sistemas en donde la seguridad es un factor importante.
+
+El algoritmo de Heap Sort consiste de dos fases.
+
+- En la primera fase, con los elementos a ordenar se construye un heap. 
+- En la segunda fase, una vez construido el heap, se desarma dicho heap y de esa forma obtendremos los valores ordenados.
