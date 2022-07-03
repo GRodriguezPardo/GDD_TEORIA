@@ -29,7 +29,6 @@ La maxima cantidad de elementos posibles de un arbol esta dada por:
 **Max elementos** = **grado^niveles - 1**
   → El uno nace de la imparidad de la raiz. Solo sirve para arboles binarios.
 **Max elementos** = **Σ[i=0, hasta <nivel>](grado^i)**
-  → El restar uno nace del grado de imparidad de la raiz.
 
 Busqueda
 ----
