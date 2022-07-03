@@ -49,7 +49,7 @@ La forma de leer el mismo. De arriba hacia abajo, de izquierda a derecha, por co
 Existen tres formas de leer los elementos que confroman tres barridos diferentes.
 
 - **Preorden** → El nodo se lee apenas se llega el mismo.
-- **Postorden** → El nodo se lee cuando seva del mismo y se se va a regresar.
+- **Postorden** → El nodo se lee cuando se va del mismo y no se va a regresar.
 - **Inorden** → El nodo se lee cuando se cambia de rama en el arbol.
 ::
 
